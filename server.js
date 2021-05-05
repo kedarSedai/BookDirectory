@@ -23,6 +23,10 @@ mongoose
     .then(() => console.log('Connected to database!!'))
     .catch(err => console.log(err));
 
+app.use((req, res, next)=>{
+    res.status(400).send("Invalid Routes");
+});
+
 app.get('/', (req, res) =>{
     res.send("Hello from Server");
 });

@@ -1,15 +1,14 @@
 const express = require('express');
-const bodyparser  = require('body-parser');
+var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-require('dotenv').config()
+require('dotenv').config();
 
 const app = express();
 
 const port = process.env.PORT || 3000;
 
-//Middleware
-// app.use(bodyparser.urlencoded({extended:false}));
-// app.use(bodyparser.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 //Import route
 const bookRoute = require('./routes/bookRoutes');
@@ -23,6 +22,7 @@ mongoose
     .then(() => console.log('Connected to database!!'))
     .catch(err => console.log(err));
 
+//HANDLING INVALID ROUTES
 app.use((req, res, next)=>{
     res.status(400).send("Invalid Routes");
 });
